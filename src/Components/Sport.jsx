@@ -7,6 +7,7 @@ import Country from "./Country";
 const Sport = () => {
   const [games, setGames] = useState([]);
   const [loader, setLoader] = useState(false);
+  
 
   useEffect(() => {
     fetchData();

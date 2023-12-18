@@ -4,9 +4,14 @@ import PlayerCard from "./PlayerCard";
 import { v4 as uuidv4 } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 
-const Players = ({ players }) => {
+const Players = ({ players, name }) => {
+  const [count, setCount] = useState(players.length);
+
+  const updatePlayerCount = () => {
+    setCount((prev) => prev + 1);
+  };
+
   const formattedPlayers = players.map((player) => {
     return { ...player, id: uuidv4() };
   });
@@ -48,8 +53,10 @@ const Players = ({ players }) => {
         if (player.id === id) {
           return { name, age, id };
         }
-      });
 
+        return player;
+      });
+      console.log("Updated Players", updatedData);
       setData(updatedData);
     } else {
       const updatedData = [newPlayer, ...data];
@@ -81,10 +88,14 @@ const Players = ({ players }) => {
         pauseOnHover
         theme="dark"
       />
+      <h1 className="font-semibold text-lg">
+        {name} ({count})
+      </h1>
       <PlayerCard
         action="add"
         addOrChangePlayer={addOrChangePlayer}
         player={{ name: "", age: "" }}
+        updatePlayerCount={updatePlayerCount}
       />
 
       {data &&
@@ -94,6 +105,7 @@ const Players = ({ players }) => {
             addOrChangePlayer={addOrChangePlayer}
             action="save"
             player={player}
+            updatePlayerCount={updatePlayerCount}
           />
         ))}
     </div>

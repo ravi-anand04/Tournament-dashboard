@@ -10,11 +10,12 @@ const Country = ({ countries }) => {
     <div className="p-6">
       {teams &&
         teams.map((team) => (
-          <div className="">
-            <h1 className="font-semibold text-lg">
-              {team.team_name} ({team.players.length})
-            </h1>
-            <Players key={uuidv4()} players={team.players} />
+          <div>
+            <Players
+              key={uuidv4()}
+              players={team.players}
+              name={team.team_name}
+            />
           </div>
         ))}
     </div>

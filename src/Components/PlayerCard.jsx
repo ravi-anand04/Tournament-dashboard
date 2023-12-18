@@ -2,9 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { Button } from "flowbite-react";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect } from "react";
 
-const PlayerCard = ({ player, action, addOrChangePlayer }) => {
+const PlayerCard = ({
+  player,
+  action,
+  addOrChangePlayer,
+  updatePlayerCount,
+}) => {
   const [name, setName] = useState(player.name);
   const [age, setAge] = useState(player.age);
   const [newPlayer, setNewPlayer] = useState({
@@ -16,6 +20,7 @@ const PlayerCard = ({ player, action, addOrChangePlayer }) => {
   const createNewPlayer = () => {
     addOrChangePlayer("add", newPlayer);
     setNewPlayer({ name: "", age: 0, id: uuidv4() });
+    updatePlayerCount();
   };
 
   const updateCurrentPlayer = () => {
